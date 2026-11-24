@@ -1,0 +1,22 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\EA Games\Need for Speed Most Wanted]
+"FirstTime"=dword:00000001
+"g_CarEnvironmentMapEnable"=dword:00000001
+"g_CarEnvironmentMapUpdateData"=dword:00000001
+"g_CarLodLevel"=dword:00000001
+"g_FSAALevel"=dword:00000000
+"g_MotionBlurEnable"=dword:00000001
+"g_OverBrightEnable"=dword:00000001
+"g_ParticleSystemEnable"=dword:00000001
+"g_PerformanceLevel"=dword:00000001
+"g_RacingResolution"=dword:00000000
+"g_RainEnable"=dword:00000001
+"g_RoadReflectionEnable"=dword:00000002
+"g_ShadowDetail"=dword:00000002
+"g_TextureFiltering"=dword:00000002
+"g_VisualTreatment"=dword:00000001
+"g_VSyncOn"=dword:00000000
+"g_WorldLodLevel"=dword:00000003
+"SIZE"=dword:00000084
+"VERSION"=dword:00000001

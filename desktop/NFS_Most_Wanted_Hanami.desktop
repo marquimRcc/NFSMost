@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Need for Speed: Most Wanted (Project Hanami Dublado)
+GenericName=Racing Game
+Comment=Need for Speed Most Wanted com Project Hanami v3.0 e Dublagem PT-BR
+Path=/home/marcos/Games/NFS_Most_Wanted_Hanami
+Exec=/home/marcos/Games/NFS_Most_Wanted_Hanami/run_game.sh
+Icon=/home/marcos/Games/NFS_Most_Wanted_Hanami/icon.png
+Terminal=false
+StartupNotify=true
+StartupWMClass=speed.exe
+Categories=Game;ActionGame;
+Keywords=game;nfs;mostwanted;hanami;racing;
