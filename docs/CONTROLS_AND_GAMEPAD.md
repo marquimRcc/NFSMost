@@ -1,27 +1,29 @@
-# Configuração de Controles e Gamepads no Linux
+# Configuração de Controles e Gamepads (Windows & Linux)
 
-Este guia explica como configurar controles modernos (como **8BitDo Ultimate 2 Wireless**, controles de Xbox Series/One, DualShock 4 e DualSense) no Need for Speed: Most Wanted (2005) rodando via Wine no Linux.
+Este guia explica como configurar controles modernos (como **8BitDo Ultimate 2 Wireless**, controles de Xbox Series/One, DualShock 4 e DualSense) no Need for Speed: Most Wanted (2005) - Project Hanami.
 
 ---
 
-## 1. O Problema da DLL `xinput1_3.dll` Legada
+## 1. Comportamento no Windows
 
-Muitos pacotes e mods do NFS Most Wanted vêm acompanhados de uma DLL `xinput1_3.dll` de 32 bits pré-instalada na raiz do jogo. Geralmente trata-se de um wrapper legado do **x360ce** projetado para Windows XP/7.
+No Windows 10 e 11, o suporte ao controle é **nativo via XInput**:
+- **8BitDo Ultimate 2**: Use a chave seletora traseira na posição **2.4G** ou **X** (XInput). O Windows reconhecerá o dispositivo imediatamente como um "Xbox 360 Controller for Windows".
+- **Controles de Xbox (One / Series)**: Plug-and-play instantâneo via receptor sem fio, Bluetooth ou cabo USB.
+- **Controles de PlayStation (DualShock 4 / DualSense)**: Podem ser usados via DS4Windows ou suporte nativo DirectInput/XInput.
 
-### Por que isso quebra o controle no Linux?
-No Linux, o Wine utiliza o driver de kernel `evdev` e a biblioteca `SDL2` através do subsistema `winebus.sys` para traduzir os botões e eixos analógicos diretamente para as APIs XInput do Windows. 
+> [!IMPORTANT]
+> A DLL `xinput1_3.dll.bak` na raiz do jogo deve permanecer renomeada como `.bak`. Essa DLL pertencia a um emulador legado (x360ce) que interceptava controles antigos DirectInput e causa conflito com as APIs XInput modernas do Windows.
 
-Quando existe um arquivo `xinput1_3.dll` de terceiros na pasta do jogo:
-1. O jogo carrega a DLL local em vez da biblioteca nativa do Wine.
-2. A DLL local tenta acessar chamadas de hook do Windows que não existem no Linux.
-3. **Resultado**: O jogo não detecta nenhum botão ou alavanca analógica do controle.
+---
 
-### Solução Definitiva
-1. Renomeie a DLL na raiz do jogo:
+## 2. Comportamento no Linux (Wine)
+
+No Linux, o Wine utiliza o driver de kernel `evdev` e a biblioteca `SDL2` através do subsistema `winebus.sys` para traduzir os botões e eixos analógicos:
+1. Renomeie qualquer DLL local de xinput:
    ```bash
    mv xinput1_3.dll xinput1_3.dll.bak
    ```
-2. No script de inicialização, force o uso dos drivers internos do Wine:
+2. Force o uso dos drivers internos do Wine (`winebus` + `SDL2`):
    ```bash
    export WINEDLLOVERRIDES="...;xinput1_3=b;xinput1_4=b;xinput9_1_0=b"
    export SDL_JOYSTICK_HIDAPI=1
@@ -29,11 +31,11 @@ Quando existe um arquivo `xinput1_3.dll` de terceiros na pasta do jogo:
 
 ---
 
-## 2. Ícones de Botões na Interface (HUD)
+## 3. Ícones de Botões na Interface (HUD)
 
 O plugin **NFSMostWanted.WidescreenFix.asi** possui suporte nativo para substituir as teclas de teclado da interface gráfica pelos ícones oficiais do controle.
 
-Abra `scripts/NFSMostWanted.WidescreenFix.ini`:
+Arquivo: `scripts/NFSMostWanted.WidescreenFix.ini`:
 ```ini
 [MISC]
 ; 1 = Ícones do Xbox (A, B, X, Y, LB, RB, LT, RT)
@@ -47,13 +49,14 @@ LeftStickDeadzone = 10.0
 
 ---
 
-## 3. Mapeamento Recomendado no Menu do Jogo
+## 4. Mapeamento Recomendado no Menu do Jogo
 
 Ao entrar em **Opções -> Controles**:
-- **Acelerar**: Gatilho Direito (RT / R2) ou Botão A / Cruz
-- **Frear / Ré**: Gatilho Esquerdo (LT / L2) ou Botão X / Quadrado
-- **Freio de Mão**: Botão B / Círculo
-- **Nitro (NOS)**: Botão A ou LB / L1
-- **Speedbreaker**: Analógico Direito ou RB / R1
+- **Acelerar**: Gatilho Direito (RT / R2) ou Botão A
+- **Frear / Ré**: Gatilho Esquerdo (LT / L2) ou Botão X
+- **Freio de Mão**: Botão B
+- **Nitro (NOS)**: Botão A ou LB
+- **Speedbreaker**: Analógico Direito ou RB
 - **Direção**: Analógico Esquerdo (X-Axis)
-- **Câmera**: Analógico Direito ou D-Pad
+- **Olhar para trás**: Analógico Direito (para baixo)
+- **Trocar Câmera**: Botão Y
