@@ -52,29 +52,44 @@ flowchart TD
 
 ---
 
-## 📂 Estrutura do Repositório
+## 📂 Estrutura do Repositório Organizada por Sistema
 
 ```
 NFSMost/
 ├── README.md                           # Documentação técnica unificada
-├── configs/
-│   ├── NFSMostWanted.WidescreenFix.ini # Resolução nativa e Borderless 1440p
-│   ├── dxvk.conf                       # Otimizações Vulkan para Linux/DXVK
-│   ├── nfs_graphics_settings.reg       # Chaves HKLM para qualidade máxima
-│   └── nfs_graphics_settings_user.reg  # Chaves HKCU/VirtualStore (sem UAC)
+├── run_game.bat                        # Inicializador rápido (atalho Windows)
+├── setup_windows.bat                   # Instalador rápido 1-clique (Windows)
+│
 ├── scripts/
-│   ├── run_game.bat                    # Inicializador rápido para Windows
-│   ├── run_game.ps1                    # Lançador inteligente PowerShell (GPU/AMD Fix)
-│   ├── setup_windows.bat               # Instalador 1-clique para Windows
-│   ├── setup_windows.ps1               # Setup completo Windows (Runtimes, Fix, Atalho)
-│   ├── manage_mods.ps1                 # Gerenciador de módulos ASI (.asi / .bak)
-│   ├── backup_restore_save.ps1         # Backup e sincronização de saves (SAVA/Docs)
-│   ├── run_game.sh                     # Lançador otimizado para Linux (Wine/DXVK)
-│   └── setup_wine_prefix.sh            # Setup de prefixo Wine para Linux
+│   ├── windows/                        # 🪟 Scripts exclusivos para Windows
+│   │   ├── run_game.bat                # Lançador em lote para Windows
+│   │   ├── run_game.ps1                # Lançador inteligente (GPU / AMD Fix)
+│   │   ├── setup_windows.bat           # Executável do setup do Windows
+│   │   ├── setup_windows.ps1           # Setup completo (Runtimes, Fix, Atalho)
+│   │   ├── manage_mods.ps1             # Gerenciador de módulos ASI (.asi / .bak)
+│   │   └── backup_restore_save.ps1     # Backup e sincronização de saves (SAVA/Docs)
+│   │
+│   └── linux/                          # 🐧 Scripts exclusivos para Linux
+│       ├── run_game.sh                 # Lançador otimizado para Wine/DXVK
+│       └── setup_wine_prefix.sh        # Setup de prefixo Wine para Linux
+│
+├── configs/
+│   ├── windows/                        # 🪟 Configurações para Windows
+│   │   ├── NFSMostWanted.WidescreenFix.ini # Resolução nativa e Borderless 1440p
+│   │   ├── nfs_graphics_settings.reg       # Chaves HKLM para qualidade máxima
+│   │   └── nfs_graphics_settings_user.reg  # Chaves HKCU/VirtualStore (sem UAC)
+│   │
+│   └── linux/                          # 🐧 Configurações para Linux
+│       ├── NFSMostWanted.WidescreenFix.ini # Resolução nativa e Borderless
+│       ├── nfs_graphics_settings.reg       # Chaves de registro para Wine
+│       └── dxvk.conf                       # Otimizações Vulkan para RADV/AMD
+│
 ├── desktop/
 │   └── NFS_Most_Wanted_Hanami.desktop  # Atalho para Área de Trabalho no Linux
+│
 └── docs/
-    ├── WINDOWS_SETUP.md                # Guia detalhado de instalação no Windows
+    ├── WINDOWS_SETUP.md                # 🪟 Guia detalhado de instalação no Windows
+    ├── LINUX_SETUP.md                  # 🐧 Guia detalhado de execução no Linux
     ├── CONTROLS_AND_GAMEPAD.md         # Guia de controles (8BitDo, Xbox, PS4/PS5)
     └── TROUBLESHOOTING.md              # Resolução de problemas (Windows e Linux)
 ```
@@ -84,23 +99,22 @@ NFSMost/
 ## 🚀 Como Executar
 
 ### No Windows:
-1. Execute o script de configuração automática:
-   ```cmd
-   scripts\setup_windows.bat
-   ```
-   *(Ou execute `setup_windows.ps1` no PowerShell)*.
-2. Inicie o jogo pelo atalho **Need for Speed Most Wanted - Hanami** na Área de Trabalho ou por `scripts\run_game.bat`.
+1. Execute o setup automatizado dando duplo-clique em `setup_windows.bat` (ou na raiz do projeto).
+2. O script detecta a GPU AMD Radeon RX, instala o wrapper dgVoodoo D3D11, ativa os mods visuais e cria o atalho na sua Área de Trabalho.
+3. Inicie o jogo pelo atalho **Need for Speed Most Wanted - Hanami** na Área de Trabalho ou por `run_game.bat`.
+4. Guia detalhado em [docs/WINDOWS_SETUP.md](docs/WINDOWS_SETUP.md).
 
 ### No Linux:
 1. Configure o prefixo Wine:
    ```bash
-   chmod +x scripts/*.sh
-   ./scripts/setup_wine_prefix.sh
+   chmod +x scripts/linux/*.sh
+   ./scripts/linux/setup_wine_prefix.sh
    ```
 2. Inicie o jogo:
    ```bash
-   ./scripts/run_game.sh
+   ./scripts/linux/run_game.sh
    ```
+3. Guia detalhado em [docs/LINUX_SETUP.md](docs/LINUX_SETUP.md).
 
 ---
 
@@ -114,7 +128,7 @@ NFSMost/
 
 ## 🔧 Diagnóstico e Resolução de Erros
 
-Para detalhes sobre erros de DLL, asfalto escuro em placas AMD, compatibilidade de saves e DEP, consulte [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
+Para detalhes sobre erros de DLL, asfalto escuro em placas AMD Radeon, compatibilidade de saves e DEP, consulte [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
 ---
 

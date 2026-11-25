@@ -26,14 +26,24 @@ Write-Host "====================================================================
 
 # 1. Localizar pasta do jogo
 if (-not (Test-Path "$GameDir\speed.exe")) {
-    $alt = "$PSScriptRoot\..\..\NFS_Most_Wanted_Hanami"
-    if (Test-Path "$alt\speed.exe") {
-        $GameDir = (Resolve-Path $alt).Path
-    } else {
-        Write-Error "Não foi possível localizar 'speed.exe' em '$GameDir'. Verifique o caminho."
-        exit 1
+    $candidates = @(
+        "$PSScriptRoot\..\..\..\NFS_Most_Wanted_Hanami",
+        "$PSScriptRoot\..\..\NFS_Most_Wanted_Hanami",
+        "$PSScriptRoot\..\.."
+    )
+    foreach ($c in $candidates) {
+        if (Test-Path "$c\speed.exe") {
+            $GameDir = (Resolve-Path $c).Path
+            break
+        }
     }
 }
+
+if (-not (Test-Path "$GameDir\speed.exe")) {
+    Write-Error "Não foi possível localizar 'speed.exe' em '$GameDir'. Verifique o caminho."
+    exit 1
+}
+
 $GameDir = (Resolve-Path $GameDir).Path
 Write-Host "[1/6] Pasta do Jogo: $GameDir" -ForegroundColor Green
 
@@ -128,11 +138,13 @@ Write-Host "  -> Adaptador: $($gpu.Name)" -ForegroundColor Cyan
 
 if ($gpu.Name -match "AMD|Radeon") {
     $amdFixDir = "$GameDir\AMD FIX"
-    if (Test-Path "$amdFixDir\d3d9.dll") {
+    if (-not (Test-Path "$GameDir\d3d9.dll") -and (Test-Path "$amdFixDir\d3d9.dll")) {
         Copy-Item "$amdFixDir\d3d9.dll" "$GameDir\" -Force
         Copy-Item "$amdFixDir\dgVoodoo.conf" "$GameDir\" -Force
         Copy-Item "$amdFixDir\dxgi.dll" "$GameDir\" -Force
         Write-Host "  -> AMD FIX (dgVoodoo D3D11 wrapper) instalado na raiz do jogo com sucesso!" -ForegroundColor Green
+    } elseif (Test-Path "$GameDir\d3d9.dll") {
+        Write-Host "  -> AMD FIX (dgVoodoo D3D11 wrapper) ja esta presente e ativo na raiz do jogo." -ForegroundColor Green
     } else {
         Write-Host "  -> [AVISO] Pasta AMD FIX não encontrada em $amdFixDir." -ForegroundColor Yellow
     }
@@ -183,8 +195,7 @@ if (-not $SkipDesktopShortcut) {
         $wshShell = New-Object -ComObject WScript.Shell
         $shortcut = $wshShell.CreateShortcut($shortcutPath)
         
-        # Apontar para o run_game.bat da pasta do jogo ou do repo
-        $launcherBat = "$GameDir\..\NFSMost\scripts\run_game.bat"
+        $launcherBat = "$GameDir\..\NFSMost\scripts\windows\run_game.bat"
         if (-not (Test-Path $launcherBat)) {
             $launcherBat = "$PSScriptRoot\run_game.bat"
         }

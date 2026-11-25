@@ -16,7 +16,9 @@ $ErrorActionPreference = "Stop"
 # 1. Localizar pasta do jogo
 $candidates = @(
     $GamePath,
+    "$PSScriptRoot\..\..\..\NFS_Most_Wanted_Hanami",
     "$PSScriptRoot\..\..\NFS_Most_Wanted_Hanami",
+    "$PSScriptRoot\..\..",
     "$PSScriptRoot\..",
     (Get-Location).Path,
     "D:\Jogos\Outros\NFSMost\NFS_Most_Wanted_Hanami"

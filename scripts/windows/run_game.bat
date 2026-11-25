@@ -4,8 +4,12 @@ title Need for Speed: Most Wanted - Hanami v3.0
 
 :: Define possiveis diretorios do jogo
 set "GAME_DIR="
-if exist "%~dp0..\..\NFS_Most_Wanted_Hanami\speed.exe" (
-    pushd "%~dp0..\..\NFS_Most_Wanted_Hanami"
+if exist "%~dp0..\..\..\NFS_Most_Wanted_Hanami\speed.exe" (
+    pushd "%~dp0..\..\..\NFS_Most_Wanted_Hanami"
+    set "GAME_DIR=!CD!"
+    popd
+) else if exist "%~dp0..\..\speed.exe" (
+    pushd "%~dp0..\.."
     set "GAME_DIR=!CD!"
     popd
 ) else if exist "%~dp0..\speed.exe" (
