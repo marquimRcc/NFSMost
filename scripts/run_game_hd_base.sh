@@ -39,7 +39,6 @@ export WINEDLLOVERRIDES="dinput8=n,b;d3d9=n,b;dxgi=n,b;d3d11=n,b;d3dx9_36=n,b;d3
 
 # 4. Suporte a Controles (8BitDo, Xbox, DualShock/DualSense) via SDL2 / Winebus
 export SDL_JOYSTICK_HIDAPI=1
-export WINE_JOYSTICK_AXES="0,1,2,3,4,5"
 
 # 5. Otimizações de GPU (AMD Radeon / DXVK / Mesa RADV)
 export DXVK_ASYNC=1
