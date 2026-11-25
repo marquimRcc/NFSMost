@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Need for Speed: Most Wanted (HD Base Dublado)
+GenericName=Racing Game
+Comment=Need for Speed Most Wanted Base Limpa com Dublagem PT-BR e Suporte HD
+Path=/home/marcos/Games/NFS_Most_Wanted_HD_Textures
+Exec=/home/marcos/Games/NFS_Most_Wanted_HD_Textures/run_game.sh
+Icon=/home/marcos/Games/NFS_Most_Wanted_Hanami/icon.png
+Terminal=false
+StartupNotify=true
+StartupWMClass=speed.exe
+Categories=Game;ActionGame;
+Keywords=game;nfs;mostwanted;hd;racing;
