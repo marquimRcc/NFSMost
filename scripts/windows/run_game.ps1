@@ -8,7 +8,9 @@
 
 [CmdletBinding()]
 param(
-    [string]$GamePath = ""
+    [string]$GamePath = "",
+    [ValidateSet("", "gamepad", "wheel")]
+    [string]$InputMode = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -100,7 +102,11 @@ foreach ($targetKey in $regPaths) {
 }
 Write-Host "[Registro] Configurações visuais máximas aplicadas com sucesso (World LOD=3)." -ForegroundColor Green
 
-# 4. Validar Saves
+# 4. Alternar perfil de entrada se solicitado e validar Saves
+if (-not [string]::IsNullOrWhiteSpace($InputMode)) {
+    & "$PSScriptRoot\switch_input_profile.ps1" -Mode $InputMode -GameDir $resolvedGameDir
+}
+
 $saveProfile = "$resolvedGameDir\SAVA\NFS Most Wanted\marcos"
 if (Test-Path $saveProfile) {
     Write-Host "[Save] Perfil de progresso 'marcos' encontrado em SAVA." -ForegroundColor Green

@@ -67,6 +67,8 @@ NFSMost/
 │   │   ├── setup_windows.bat           # Executável do setup do Windows
 │   │   ├── setup_windows.ps1           # Setup completo (Runtimes, Fix, Atalho)
 │   │   ├── manage_mods.ps1             # Gerenciador de módulos ASI (.asi / .bak)
+│   │   ├── switch_input_profile.bat    # Alternador interativo Controle vs Volante G920
+│   │   ├── switch_input_profile.ps1    # Script de perfil de entrada (XInput / DirectInput)
 │   │   └── backup_restore_save.ps1     # Backup e sincronização de saves (SAVA/Docs)
 │   │
 │   └── linux/                          # 🐧 Scripts exclusivos para Linux
@@ -91,6 +93,7 @@ NFSMost/
     ├── WINDOWS_SETUP.md                # 🪟 Guia detalhado de instalação no Windows
     ├── LINUX_SETUP.md                  # 🐧 Guia detalhado de execução no Linux
     ├── CONTROLS_AND_GAMEPAD.md         # Guia de controles (8BitDo, Xbox, PS4/PS5)
+    ├── WHEEL_G920_SETUP.md             # 🏎️ Guia de configuração do volante Logitech G920
     └── TROUBLESHOOTING.md              # Resolução de problemas (Windows e Linux)
 ```
 

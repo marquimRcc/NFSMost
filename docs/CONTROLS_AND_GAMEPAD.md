@@ -60,3 +60,11 @@ Ao entrar em **Opções -> Controles**:
 - **Direção**: Analógico Esquerdo (X-Axis)
 - **Olhar para trás**: Analógico Direito (para baixo)
 - **Trocar Câmera**: Botão Y
+
+---
+
+## 5. Volante Logitech G920 (Windows)
+
+Para usar o volante **Logitech G920** no Windows sem conflitos com o modo XInput do controle:
+- Utilize o script `scripts/windows/switch_input_profile.bat` (ou `switch_input_profile.ps1 -Mode wheel`) para alternar entre **Controle** e **Volante**.
+- Consulte o guia dedicado em [docs/WHEEL_G920_SETUP.md](WHEEL_G920_SETUP.md) para ajustes do Logitech G HUB (rotação 270°–360°, Pedais Combinados e Force Feedback).
